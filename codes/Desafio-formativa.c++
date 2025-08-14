@@ -9,7 +9,6 @@ const int LowLuz = 500;
 const int LowUmidade = 30;
 const int HighUmidade = 70;
 
-
 void setup() {
   pinMode(sensorU, INPUT);
   pinMode(sensorL, INPUT);
