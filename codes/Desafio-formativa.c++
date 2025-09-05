@@ -20,9 +20,9 @@ void loop() {
   estadoSensorL = analogRead(sensorL);
   valorUmidade = map(estadoSensorU, 0, 1023, 0, 100);
 
-  if (valorUmidade <= LowUmidade && estadoSensorL < LowLuz) {
-    do {
-      digitalWrite(rele, HIGH);
-    } while (valorUmidade < HighUmidade);
+  if (valorUmidade <= LowUmidade && estadoSensorL < LowLuz && valorUmidade < HighUmidade) {
+    digitalWrite(rele, HIGH);
+  } else {
+    digitalWrite(rele, LOW)
   }
 }
