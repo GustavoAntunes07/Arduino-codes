@@ -1,8 +1,8 @@
-int sensorU = A1;
-int sensorL = A0;
-int estadoSensorU = 0;
-int estadoSensorL = 0;
-int rele = 3;
+#define sensorU A1
+#define sensorL A0
+#define rele 8
+int estadoSensorU;
+int estadoSensorL;
 int valorUmidade;
 
 const int LowLuz = 500;
@@ -13,16 +13,22 @@ void setup() {
   pinMode(sensorU, INPUT);
   pinMode(sensorL, INPUT);
   pinMode(rele, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
   estadoSensorU = analogRead(sensorU);
   estadoSensorL = analogRead(sensorL);
   valorUmidade = map(estadoSensorU, 0, 1023, 0, 100);
-
-  if (valorUmidade <= LowUmidade && estadoSensorL < LowLuz && valorUmidade < HighUmidade) {
+  Serial.print(valorUmidade);
+  Serial.println("%");
+  Serial.println(estadoSensorL);
+  Serial.println("------------"); 
+  delay(600);
+  
+  if (valorUmidade <= LowUmidade && estadoSensorL < LowLuz) {
     digitalWrite(rele, HIGH);
-  } else {
-    digitalWrite(rele, LOW)
+  } else if(valorUmidade >= HighUmidade) {
+    digitalWrite(rele, LOW);
   }
 }
